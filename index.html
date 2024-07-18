@@ -181,12 +181,88 @@ We introduce a simple deep learning (DL) workflow to aid researchers in navigati
 <section class="section hero is-light">
     <div class="container is-max-desktop content">
         <h2 class="title is-3">Workflow</h2>
+        <div class="hero-body">
+            <img src="static/images/workflow.png"
+                alt="Schematic showing an example of a workflow for deep learning." />
+            <h6 class="subtitle has-text-centered">Example workflow of a Deep Learning application.</h6>
+        </div>
         <div class="content has-text-justified">
-            <p>An explanaition about the Deep Learning Workflow will be given here.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-            aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-            aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p>We introduce a simple Workflow of Deep Learning, which can be followed for the successful development of Deep
+            Learning methods for supported EM analysis. In our workflow we propose 3 clusters:</p>
+            <ul>
+                <li>Task and model definition (orange).</li>
+                <li>Data collection and preparation (green).</li>
+                <li>Model development (red).</li>
+            </ul>
+            <h3>Task and model definition</h3>
+            <p>The task definition influences the model choice later on and goes hand in hand with the data collection step.
+               The deep learning workflow can be differentiated into either a task-driven pipeline or a data-driven pipeline.
+               In the task driven approch the task that should be solved is defined first and then data is collected accordingly.
+               A benefit of this is that it directly aims to solve a part of the EM research pipeline. A downside of this is that
+               data aquisition requires additional time and effort and not every task of the EM research pipeline might easily be
+                solved using deep learning.<br>
+                The data driven approach on the other side aims to leverage data that is already available. An advantage is that it
+                can create a stong foundation for future tasks. On the downside it might not be immeadeately clear how the available data
+                might help to solve a task from the current EM research pipeline.
+            </p>
+            <p>
+                A structured definition of the task involves several
+                key considerations. First, we need to clearly define the input data and the expected output. This
+                clarity ensures that the task is well understood and that the goals are achievable. It is also essential to
+                assess whether the output can be logically derived from the input data, ensuring there is a meaningful
+                correlation between them.<br>
+                In general, it is possible to design architectures yourself from scratch. However, this is not recom-
+                mended. First, it requires a lot of compute resources and time to design a well fitted architecture.
+                Second, there are many well designed architectures, which are frequently used, hence sufficiently tested,
+                as well as there are pretrained models freely available.<br>
+                Furthermore, when selecting a model backbone one should consider that the type matches the data characteristics and
+                balance the number of trainable parameters with the available training data. Having a large number of trainable
+                parameters with a small amount of data will likely lead to overfitting.
+            </p>
+
+            <h3>Data collection and preparation</h3>
+            <p>
+                In deep learning, it is commonly believed that more data leads to better model performance. However,
+                this is not always true; High-quality data is essential to derive correlations between model inputs and
+                outputs, providing a strong learning signal. Achieving optimal model performance requires a balance between data quality, variance, robustness,
+                and dataset size.
+            </p>
+            <p>
+                For data acquisition in electron microscopy (EM), there are three primary sources: reusing existing
+                data, acquiring new data, and generating synthetic data, each with distinct benefits and downsides.<br>
+                During data collection, it is crucial to investigate potential correlations between model inputs
+                and outputs, as a deep learning model can only be trained successfully if such correlations exist.
+                Visualization techniques are vital in this process. Visualizing raw image grids helps assess image
+                quality, detect artifacts, and understand data variation.
+            </p>
+            <p>
+                High-quality annotations are similarly crucial for the performance of deep learning models as large
+                dataset sizes. <br>
+                Annotation types are strongly correlated with deep learning tasks and can be
+                differentiated into several categories: classification labels, regression labels, keypoints, bounding boxes
+                and segmentation masks. These can be further categorized based on their complexity
+                into image-level, object/instance-level, and pixel-level annotations.
+            </p>
+            <p>
+                Effective data preprocessing plays a vital role in preparing high-quality datasets for deep learning
+                models. While deep learning models thrive on large dataset sizes, the quality of the data is equally
+                important and can be ensured by detailed data preprocessing.
+            </p>
+            <h3> Model development</h3>
+            <p>
+                During model training the parameters of the selected architecture are adapted in such way, that the
+                model is able to approximate input-output relations within the data as precise as possible. However,
+                it also involves correct initialization of the model parameters, suitable tuning of hyperparameters, and
+                suitable monitoring of the training process to identify possible pitfalls.
+            </p>
+                Training a machine learning model involves initializing its parameters, and proper initialization is crucial for efficient training. Basic training from scratch, where parameters are randomly initialized, is viable only with large, diverse datasets. In electron microscopy (EM), where datasets are typically small and specific, training from scratch often leads to poor generalization. Using pretrained weights from models trained on similar tasks but larger datasets is more effective. Pretrained models, even those with a domain gap like ImageNet-pretrained models, can improve training speed and performance.<br>
+
+Hyperparameter tuning is essential for optimizing model performance. This involves experimenting with various settings for parameters like learning rate, batch size, and optimizer. Techniques such as grid search, random search, and Bayesian optimization are commonly used. Tools like Weights & Biases can streamline hyperparameter tuning.<br>
+
+Effective logging of the training process is critical. Tools like TensorBoard and MLflow help monitor metrics and losses for training, validation, and test datasets. Logging can identify issues like overfitting, where the model performs well on training data but poorly on validation data. Strategies to mitigate overfitting include early stopping, data augmentation, and regularization techniques like dropout and batch normalization.<br>
+
+Visualizations of model inputs, outputs, and learned features provide insights into model performance and behavior. Techniques like Grad-CAM, t-SNE, and PCA help understand model decisions and reveal biases. Saving model weights and optimizer states regularly allows resuming training if interrupted and facilitates using intermediate models. Logging gradients can identify issues like exploding or vanishing gradients, which can be addressed by adjusting the learning rate, gradient clipping, or adding skip connections.<br>
+            </p>
         </div>
     </div>
 </section>
